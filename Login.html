@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>ブレイクハート</title>
+</head>
+<body>
+
+<a id="text">名前を入力してください</a>
+
+<form>
+	<input type="text" id="name">
+	<button type="button" id="login">ログイン</button>
+</form>
+
+<button type="button" id="getCounts">現在の人数</button>
+<a id="countText"></a>
+
+<script>
+var text = document.querySelector("#text");
+var login  = document.querySelector("#login");
+var count = document.querySelector("#getCounts");
+var counts = 0;
+var countText = document.querySelector("#countText");
+login.addEventListener("click", function(){
+	var id = document.querySelector("#name").value;
+	var request = new XMLHttpRequest();
+	request.open('GET', 'http://localhost/Login.php?name='+id, false);
+	request.onload = function() {
+		if (request.status === 200) {
+			var response = request.responseText;
+			var json     = JSON.parse(response);
+		
+			text.innerHTML = "相手待ち";		
+			counts = json;
+		}
+	};
+	request.onerror = function() {
+		//エラー時の処理
+		text.innerHTML = "エラーが発生しました";
+	};
+	//送信
+	request.send();		//POSTの場合は引数に文字列を渡す
+	
+	
+	login.disabled = true;
+});
+
+count.addEventListener("click", function() {
+	countText.innerHTML = "現在の人数は"+counts+"人です";
+	
+	if (counts >= 2) {
+		text.innerHTML = "人数が揃いました";
+		document.location = "gameplay.html";
+	}
+});
+</script>
+</body>
+</html>
