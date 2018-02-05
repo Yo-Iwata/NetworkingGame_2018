@@ -3,13 +3,18 @@
 <head>
 	<meta charset="utf8">
 	<title>ブレイクハート</title>
+	<audio src="asset/BGM/BGM_1.wav" autoplay loop></audio>
 </head>
 <body>
-	<h1>ブレイクハート</h1>
+	
+    <div align="center">
+     <img src="asset/Images/choko.jpg" width="286px" height="222px" alt="">
+     <h1>ブレイクハート</h1>
+    <form>
+	  <button type="button" id="start">始める</button>
+    </form>
+</div>
 
-<form>
-	<button type="button" id="start">始める</button>
-</form>
 <script>
 	var start = document.querySelector("#start");
 	start.addEventListener("click", function() {
