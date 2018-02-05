@@ -47,6 +47,21 @@ login.addEventListener("click", function(){
 });
 
 count.addEventListener("click", function() {
+	var request = new XMLHttpRequest();	
+	request.open('GET', 'http://localhost/Login.php', false);
+	request.onload = function() {
+		if (request.status === 200) {
+			var response = request.responseText;
+			var json     = JSON.parse(response);
+				
+			counts = json;
+		}
+	};
+	request.onerror = function() {
+		//エラー時の処理
+		text.innerHTML = "エラーが発生しました";
+	};
+	
 	countText.innerHTML = "現在の人数は"+counts+"人です";
 	
 	if (counts >= 2) {
