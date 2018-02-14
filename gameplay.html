@@ -6,8 +6,8 @@
 	<style type="text/css">
 		#canvas{
 			border: 1px solid gray;
-			width: 300px;
-			height: 250px;
+			width: 640px;
+			height: 480px;
 		}
 	</style>
 </head>
@@ -17,10 +17,6 @@
 <canvas id="canvas"></canvas>
 
 <a id="count">0</a>
-
-<form>
-	<button type="button" id="getHello">Hello</button>
-</form>
 
 <script>
 //チョコを破壊したか?
@@ -39,10 +35,13 @@ imgs[0] = new Image();
 imgs[0].src = "asset/Images/choko.jpg";
 imgs[1] = new Image();
 imgs[1].src = "asset/Images/rip.jpg";
+//
+var width = imgs[0].width;
+var height = imgs[0].height;
 //表示する画像番号
 var imgnum = 0;
 //canvasに画像の表示
-context.drawImage(imgs[imgnum],0,0);
+context.drawImage(imgs[imgnum],0,0,320,150);
 //canvas内でクリックされたらカウントを増やす
 canvas.onclick = function(e)
 {
@@ -50,17 +49,21 @@ canvas.onclick = function(e)
 	clickCount++;
 	//現在のカウント数を表示
 	counttext.innerHTML = clickCount;
-	//10回クリックしたら
-	if(clickCount >= 10)
+	//20回クリックしたら
+	if(clickCount >= 20)
 	{
 		//画像の表示番号を増やす
 		imgnum = 1;
 		//画像の表示
-		context.drawImage(imgs[imgnum],0,0);
+		context.drawImage(imgs[imgnum],0,0,320,150);
 		//チョコを破壊した
 		isbreak = true;
 		//チョコの破壊を表示
 		counttext.innerHTML = "チョコの破壊";
+	}
+	else
+	{
+		context.drawImage(imgs[imgnum],0,0,320,150);
 	}
 }
 var hello  = document.querySelector("#getHello");
