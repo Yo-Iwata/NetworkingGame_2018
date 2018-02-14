@@ -16,7 +16,10 @@
 <!-- 通信結果をここに表示 -->
 <canvas id="canvas"></canvas>
 
-<a id="count">0</a>
+<!-- サウンドリソースの読み込み -->
+<audio id="clickse" preload="auto">
+<source src="asset/SE/punch-middle2.wav" type="audio/wav">
+</audio>
 
 <script>
 //チョコを破壊したか?
@@ -47,13 +50,17 @@ var txtnum = 0;
 context.font = "italic 40px Arial";
 context.fillStyle = "red";
 context.fillText(txts[txtnum],15,80);
+//サウンド
+var sound = document.getElementById("clickse");
 //canvas内でクリックされたらカウントを増やす
 canvas.onclick = function(e)
 {
+	sound.currentTime = 0;
+	sound.play();
 	//カウント増やす
 	clickCount++;
 	//現在のカウント数を表示
-	counttext.innerHTML = clickCount;
+	//counttext.innerHTML = clickCount;
 	//20回クリックしたら
 	if(clickCount >= 20)
 	{
@@ -64,7 +71,7 @@ canvas.onclick = function(e)
 		//チョコを破壊した
 		isbreak = true;
 		//チョコの破壊を表示
-		counttext.innerHTML = "チョコの破壊";
+		//counttext.innerHTML = "チョコの破壊";
 	}
 	//画像の表示
 	context.drawImage(imgs[imgnum],0,0,320,150);
@@ -72,6 +79,7 @@ canvas.onclick = function(e)
 	if(isbreak === true)
 	{
 		context.fillText(txts[1],0,80);
+		sound.pause();
 	}
 }
 var hello  = document.querySelector("#getHello");
