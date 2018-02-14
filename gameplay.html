@@ -43,13 +43,13 @@ var imgnum = 0;
 //canvasに画像の表示
 //context.drawImage(imgs[imgnum],0,0,320,150);
 //文字の表示
-var txts = new Array();
-txts[0] = "チョコを叩け!!";
-txts[1] = "割ったゼ!ザマァ!";
-var txtnum = 0;
+var txt1 = "クリックして";
+var txt2 = "チョコを叩け!!";
+var txt3 = "割ったゼ!ザマァ!";
 context.font = "italic 40px Arial";
 context.fillStyle = "red";
-context.fillText(txts[txtnum],15,80);
+context.fillText(txt1,15,60);
+context.fillText(txt2,15,100);
 //サウンド
 var sound = document.getElementById("clickse");
 //canvas内でクリックされたらカウントを増やす
@@ -78,7 +78,7 @@ canvas.onclick = function(e)
 	
 	if(isbreak === true)
 	{
-		context.fillText(txts[1],0,80);
+		context.fillText(txt3,0,80);
 		sound.pause();
 	}
 }
